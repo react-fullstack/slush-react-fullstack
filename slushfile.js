@@ -14,7 +14,7 @@ gulp.task('default', function (done) {
       return done();
     }
     gulp.src(__dirname + '/templates/**')
-      .pipe(template(answers))
+      .pipe(template(answers, {interpolate: /<\?\?(.+?)\?>/g}))
       .pipe(conflict('./'))
       .pipe(gulp.dest('./'))
       .pipe(install())
