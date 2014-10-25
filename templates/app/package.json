@@ -1,5 +1,5 @@
 {
-  "name": "<?? name ?>",
+  "name": "<?? slugifiedAppName ?>",
   "version": "0.0.1",
   "description": "A template for fullstack react applications with gulp and browserify",
   "main": "index.js",
