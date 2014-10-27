@@ -15,11 +15,6 @@ module.exports = function(_, conflict, gulp, inquirer, install, mkdirp, rename, 
     }, {
       name: 'appAuthor',
       message: 'What is your company/author name?'
-    // }, {
-    //   type: 'confirm',
-    //   name: 'addArticleExample',
-    //   message: 'Would you like to generate the article example CRUD module?',
-    //   default: true
     }];
 	    //Ask
     inquirer.prompt(prompts, function (answers) {
