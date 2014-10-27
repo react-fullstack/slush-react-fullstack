@@ -10,7 +10,8 @@ module.exports = function (_, conflict, gulp, inquirer, install, mkdirp, rename,
 				return done();
 			}
 			answers.slugifiedComponentName = _.slugify(answers.componentName);
-			answers.classifiedComponentName = _.classify(answers.slugifiedComponentName);
+			answers.underscoredComponentName = _.underscored(answers.slugifiedComponentName);
+			answers.classifiedComponentName = _.classify(answers.underscoredComponentName);
 
 			gulp.src(__dirname + '/../templates/react-component/react-component.jsx')
         .pipe(template(answers, {interpolate: /<\?\?(.+?)\?>/g}))

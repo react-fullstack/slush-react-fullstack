@@ -12,7 +12,7 @@ function getAppState(){
   return AppStore.getData();
 };
 
-var ?? name ? = React.createClass({
+var <?? classifiedComponentName ?> = React.createClass({
   getInitialState: function(){
     return getAppState();
   },
@@ -41,4 +41,4 @@ var ?? name ? = React.createClass({
   }
 })
 
-module.exports = ?? name ?;
+module.exports = <?? classifiedComponentName ?>;
