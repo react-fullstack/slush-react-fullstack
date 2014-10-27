@@ -24,16 +24,3 @@ describe('Main App', function() {
     // }
   });
 });
-describe('Main App Items', function() {
-  it('has React as first Todo item', function() {
-
-    var React = require('react/addons');
-    var App = require('../components/Home.jsx');
-    var TestUtils = React.addons.TestUtils;
-
-    var testApp = TestUtils.renderIntoDocument(<App/>);
-    var items = TestUtils.scryRenderedDOMComponentsWithClass(testApp, "list-group-item");
-
-    expect(items[0].getDOMNode().textContent).toEqual('Reactx');
-  });
-});
