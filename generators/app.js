@@ -1,4 +1,4 @@
-module.exports = function(_, conflict, gulp, inflection, inquirer, install, mkdirp, rename, template){
+module.exports = function(_, conflict, gulp, inquirer, install, mkdirp, rename, template){
 	gulp.task('default', function (done) {
     var prompts = [{
       name: 'appName',
@@ -29,15 +29,6 @@ module.exports = function(_, conflict, gulp, inflection, inquirer, install, mkdi
       answers.slugifiedAppName = _.slugify(answers.appName);
       answers.humanizedAppName = _.humanize(answers.appName);
       answers.capitalizedAppAuthor = _.capitalize(answers.appAuthor);
-      
-      // gulp.src(__dirname + '/../templates/app/**')
-      //   .pipe(rename(function(file) {
-      //     if (file.basename.indexOf('__') == 0) {
-      //       file.basename = '.' + file.basename.slice(2);
-      //     }
-      //  	}))
-      //   .pipe(conflict('./'))
-      //   .pipe(gulp.dest('./'));
 
       gulp.src(__dirname + '/../templates/app/**')
         .pipe(template(answers, {interpolate: /<\?\?(.+?)\?>/g}))
@@ -51,29 +42,3 @@ module.exports = function(_, conflict, gulp, inflection, inquirer, install, mkdi
 	});
 	return gulp;
 }
-
-// var gulp = require('gulp');
-// var install = require('gulp-install');
-// var conflict = require('gulp-conflict');
-// var template = require('gulp-template');
-// var inquirer = require('inquirer');
-
-// gulp.task('default', function (done) {
-//   inquirer.prompt([
-//     {type: 'input', name: 'name', message: 'Give your app a name', default: gulp.args.join(' ')},
-//     {type: 'confirm', name: 'moveon', message: 'Continue?'}
-//   ],
-//   function (answers){
-//     if (!answers.moveon) {
-//       return done();
-//     }
-//     gulp.src(__dirname + '/templates/**')
-//       .pipe(template(answers, {interpolate: /<\?\?(.+?)\?>/g}))
-//       .pipe(conflict('./'))
-//       .pipe(gulp.dest('./'))
-//       .pipe(install())
-//       .on('end', function() {
-//         done();
-//       })
-//   });
-// });
