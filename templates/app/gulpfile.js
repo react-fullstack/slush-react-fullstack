@@ -56,7 +56,7 @@ gulp.task('jest', function () {
         unmockedModulePathPatterns: [
             "node_modules/react"
         ],
-        testDirectoryName: "__tests__",
+        testDirectoryName: "tests",
         testPathIgnorePatterns: [
             "node_modules",
             "spec/support"
