@@ -1,3 +1,5 @@
+/** @jsx React.DOM */
+
 'use strict';
 
 
@@ -44,11 +46,6 @@ var TODO = React.createClass({
             {items} 
           </ul>
         </div> 
-        <div className="footer">
-          <div className="container">
-            <p className="text-muted"> Fork us on Github! </p>
-          </div>
-        </div>
       </div>     
     );
   }

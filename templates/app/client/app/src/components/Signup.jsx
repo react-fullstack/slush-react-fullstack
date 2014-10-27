@@ -1,3 +1,6 @@
+/** @jsx React.DOM */
+
+
 'use strict';
 
 var React = require('react');
@@ -22,8 +25,6 @@ var SIGNUP  = React.createClass({
   render: function(){
     return (
       <div>
-        <NAV/>
-        <BANNER/>
         <div className="container">
         <h1>Signup</h1>
         <form className="form-horizontal" role="form">
@@ -48,7 +49,7 @@ var SIGNUP  = React.createClass({
            
             <div className="form-group">
               <div className="control-button">
-                <button type="submit" onClick={this.handleClick} >Sign up</button>
+                <button type="submit" className="btn btn-default" onClick={this.handleClick} >Sign up</button>
               </div>
             </div>
           </form>
