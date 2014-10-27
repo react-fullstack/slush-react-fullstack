@@ -7,6 +7,7 @@ var reactify = require('reactify');
 var source = require('vinyl-source-stream');
 var connect = require('gulp-connect');
 var nodemon = require('gulp-nodemon');
+var jest = require('gulp-jest');
 
 var paths = {
     app: ['./client/app/src/app.jsx'],
@@ -48,3 +49,22 @@ gulp.task('serve', ['browserify', 'nodemon']);
 
 // Update Express is serving the right files
 // Browserify/Reactify/Serve
+
+gulp.task('jest', function () {
+    return gulp.src('./client/app/src/').pipe(jest({
+        scriptPreprocessor: "./preprocessor.js",
+        unmockedModulePathPatterns: [
+            "node_modules/react"
+        ],
+        testDirectoryName: "__tests__",
+        testPathIgnorePatterns: [
+            "node_modules",
+            "spec/support"
+        ],
+        moduleFileExtensions: [
+            "js",
+            "json",
+            "react"
+        ]
+    }));
+});

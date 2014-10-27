@@ -1,3 +1,6 @@
+/** @jsx React.DOM */
+
+
 'use strict';
 
 var React = require('react');
@@ -13,14 +16,13 @@ var Q = require('q');
 
 function getAppState(){
   return AppStore.getData();
-}
+};
 
 function getInitialAppState(){
   return AppStore.getInitialData();
 }
 
 var APP = React.createClass({
-
   getInitialState: function(){
     return getInitialAppState();
     // return getAppState();
@@ -62,13 +64,10 @@ var APP = React.createClass({
   handleClick: function(){
     AppActions.exampleAction('Data from View');
   },
-
+  
   render: function(){
-    console.log("my state is", this.state)
     return (
       <div>
-        <NAV/>
-        <BANNER/>
         <TODO allTodos={this.state.todos}/>
       </div>
       )
@@ -76,28 +75,3 @@ var APP = React.createClass({
 })
 
 module.exports = APP;
-
-// AppActions.populateAction();
-// return AppDispatcher.handleViewAction();
-// AppStore.getData()
-// httpGet
-
-// AppActions.pop()
-//   .then( AppDispatcher.handleViewAction(options) )
-//   .then( AppStore.getData() )
-//   .then( httpGet( url ) )
-//   .then(function( data){
-
-//   })
-
-
-
-
-
-
-
-
-
-
-
-
