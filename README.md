@@ -12,7 +12,7 @@ npm install -g gulp
 ```
 Make a new directory, and `cd` into it
 ```
-mkdir my-new-project && cd $_
+mkdir my-new-project && cd my-new-project
 ```
 Install `react-fullstack generator`
 ```
@@ -25,9 +25,8 @@ slush react-fullstack
 
 Run `gulp` to preview on local host, don't forget to spin up an instance of mongo when doing so!
 
-##Generators##
+##Sub-generators##
 
-  * react-fullstack (aka react-fullstack:app)
   * react-fullstack:crud-app
   * react-fullstack:react-component
   * react-fullstack:react-constant
@@ -35,7 +34,7 @@ Run `gulp` to preview on local host, don't forget to spin up an instance of mong
   * react-fullstack:react-dispatcher
   * react-fullstack:react-store
 
-To install generators, pick one from the above list:
+To install a sub-generator, pick one from the above list:
  ```
  slush react-fullstack:generator_of_your_choice
  ```
