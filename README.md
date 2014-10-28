@@ -28,12 +28,12 @@ Run `gulp` to preview on local host, don't forget to spin up an instance of mong
 ##Generators##
 
   * react-fullstack (aka react-fullstack:app)
-  * react-fullstack:endpoint
-  * react-fullstack:component
-  * react-fullstack:crud
-  * react-fullstack:action
-  * react-fullstack:dispatcher
-  * react-fullstack:store
+  * react-fullstack:crud-app
+  * react-fullstack:react-component
+  * react-fullstack:react-constant
+  * react-fullstack:react-action
+  * react-fullstack:react-dispatcher
+  * react-fullstack:react-store
 
 To install generators, pick one from the above list:
  ```
