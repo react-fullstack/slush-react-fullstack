@@ -6,7 +6,7 @@ module.exports = function (_, conflict, gulp, inquirer, install, mkdirp, rename,
     }];
     //Ask
   	inquirer.prompt(prompts, function (answers) {
-    	if (!answers.appName) {
+    	if (!answers) {
         return done();
       }
       answers.slugifiedCrudName = _.slugify(answers.crudName);
@@ -17,12 +17,23 @@ module.exports = function (_, conflict, gulp, inquirer, install, mkdirp, rename,
         .pipe(template(answers, {interpolate: /<\?\?(.+?)\?>/g}))
      		.pipe(rename(function(file) {
      			if (file.basename.slice(0, 8) === 'CrudApp') {
+            console.log('working here', file.basename);
      				file.basename = file.basename.replace('CrudApp', answers.classifiedCrudName);
+            console.log(file.basename);
      			}
      		}))
         .pipe(conflict('client/' + answers.classfiedCrudName + '/'))
         .pipe(gulp.dest('client/' + answers.classfiedCrudName + '/'))
-        .pipe(install())
+        .pipe(install());
+
+      gulp.src(__dirname + '/../templates/crud-app/server/**')
+        .pipe(template(answers, {interpolate: /<\?\?(.+?)\?>/g}))
+        .pipe(rename(function(file) {
+          if (file.basename.indexOf('thing') === 0) {
+            file.basename = file.basename.replace('thing', answers.classifiedCrudName);
+            console.log('second ', file.basename)
+          }
+        }))
         .on('end', function() {
           done();
         });
