@@ -1,0 +1,45 @@
+.navbar {
+  margin-bottom: 0;
+}
+
+.list-group {
+  margin-top: 25px;
+  margin-bottom: 150px;
+}
+
+.banner {
+  text-align: center;
+  background-color: #D184B7;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.login {
+  margin-right: 25px;
+}
+
+.input-group {
+  margin-top: 25px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
+.container .text-muted {
+  margin: 20px 0;
+}
+
+.control-label {
+  margin-left: 20px;
+}
+
+.control-button {
+  margin-left: 20px;
+}
+
