@@ -35,6 +35,11 @@ Run `gulp` to preview on local host, don't forget to spin up an instance of mong
   * react-fullstack:dispatcher
   * react-fullstack:store
 
+To install generators, pick one from the above list:
+ ```
+ slush react-fullstack:generator_of_your_choice
+ ```
+
 **Note: Generators are to be run from the root directory of your app.**
 
 ##Testing
