@@ -29,8 +29,8 @@ Run `gulp` to preview on local host, don't forget to spin up an instance of mong
 
   * react-fullstack:crud-app
   * react-fullstack:react-component
-  * react-fullstack:react-constant
-  * react-fullstack:react-action
+  * react-fullstack:react-constants
+  * react-fullstack:react-actions
   * react-fullstack:react-dispatcher
   * react-fullstack:react-store
 
