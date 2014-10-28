@@ -12,7 +12,8 @@ include as an option with the generator.
 - Port from Slush to Yeoman.
 - This shouldn't be too hard - Use these templates but learn grunt
 
-- Custom Folder Names Upon Sub Generation
+- Custom Injection into existing files upon generation of subroutes.
+- Improve Gulp File - Minification etc.
 
 - BLOG! Tutorial or even a 'how good is this'.
 - Use it in your next project

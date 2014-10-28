@@ -43,7 +43,7 @@ gulp.task('watch', function() {
 });
 
 // The default task (called when you run `gulp` from cli)
-gulp.task('default', ['connect', 'watch', 'browserify'], 'serve');
+gulp.task('default', ['serve']);
 
 gulp.task('serve', ['browserify', 'nodemon']);
 
