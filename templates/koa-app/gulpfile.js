@@ -33,7 +33,7 @@ gulp.task('browserify', function() {
 // });
 
 gulp.task('nodemon', function(done){
-    nodemon({ script: './server/app.js', env: { 'NODE_ENV': 'development'}})
+    nodemon({ script: './server/app.js', env: { 'NODE_ENV': 'development'}, nodeArgs: ['--harmony']})
     .on('restart');
 })
 
