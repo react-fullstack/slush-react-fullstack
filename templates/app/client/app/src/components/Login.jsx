@@ -8,9 +8,6 @@ var React = require('react');
 var AppStore = require('../stores/AppStore');
 var AppActions = require('../actions/AppActions');
 
-var NAV = require('./NavBar.jsx');
-var BANNER = require('./Banner.jsx');
-
 var LOGIN  = React.createClass({
 
   handleClick: function(){
