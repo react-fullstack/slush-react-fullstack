@@ -19,14 +19,15 @@ if(config.seedDB) { require('./config/seed'); }
 
 // Setup server
 var app = koa();
-var server = require('http').createServer(app.callback());
+
 require('./config/express')(app);
 require('./routes')(app);
+var server = require('http').createServer(app.callback());
 
 // Start server
 server.listen(config.port, config.ip, function () {
   // console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));
-  console.log('Express server listening on %d, in %s mode', config.port, process.env.NODE_ENV);
+  console.log('Koa server listening on %d, in %s mode', config.port, process.env.NODE_ENV);
 });
 
 // Expose app
