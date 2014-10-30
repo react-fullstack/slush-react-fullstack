@@ -11,15 +11,18 @@ var bodyParser = require('koa-bodyparser');
 var passport = require('koa-passport');
 var views = require('koa-views');
 var methodOverride = require('koa-methodoverride');
+var compression = require('koa-compress');
+var logger = require('koa-logger');
+var errorHandler = require('koa-error-handler');
 
 // var express = require('express');
 var favicon = require('serve-favicon');
 var morgan = require('morgan');
-var compression = require('compression');
+// var compression = require('compression');
 // var bodyParser = require('body-parser');
 // var methodOverride = require('method-override');
-var cookieParser = require('cookie-parser');
-var errorHandler = require('errorhandler');
+// var cookieParser = require('cookie-parser');
+// var errorHandler = require('errorhandler');
 var path = require('path');
 var config = require('./environment');
 // var passport = require('passport');
@@ -48,7 +51,7 @@ module.exports = function(app) {
   app.use(compression());
   app.use(bodyParser());
   app.use(methodOverride());
-  app.use(cookieParser());
+  // app.use(cookieParser());
   app.use(passport.initialize());
   app.use(passport.session());
 
@@ -64,7 +67,7 @@ module.exports = function(app) {
   app.keys = [config.secrets.session];
   app.use(session({
     store: mongoStore.create({
-      mongoose: mongoose.connection;
+      mongoose: mongoose.connection
     })
   }));
 
@@ -76,11 +79,17 @@ module.exports = function(app) {
   // }
 
   // if ('development' === env || 'test' === env) {
-    // app.use(require('connect-livereload')());
-    app.use(serve(path.join(config.root, '.tmp')));
-    app.use(serve(path.join(config.root, 'client')));
-    app.set('appPath', 'client');
-    app.use(morgan('dev'));
-    app.use(errorHandler()); // Error handler - has to be last
+  //   app.use(require('connect-livereload')());
+  //   app.use(serve(path.join(config.root, '.tmp')));
+  //   app.use(serve(path.join(config.root, 'client')));
+  //   app.set('appPath', 'client');
+  //   app.use(morgan('dev'));
+  //   app.use(errorHandler()); // Error handler - has to be last
   // }
+
+  app.use(require('koa-livereload')());
+  app.use(serve(path.join(config.root, '.tmp')));
+  app.use(serve(path.join(config.root, 'client')));
+  app.use(logger());
+  errorHandler(app); // Error handler - has to be last
 };
