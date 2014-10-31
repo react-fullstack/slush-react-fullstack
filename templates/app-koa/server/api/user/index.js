@@ -9,15 +9,15 @@ var auth = require('../../auth/auth.service');
 // var router = express.Router();
 
 var router = require('koa-router');
+
 const userRouter = new router();
 
-//NOT SURE IF THESE ARGUMENTS WORK THE SAME AS EXPRESS  
-userRouter.get('/', auth.hasRole('admin'), controller.index);
-userRouter.delete('/:id', auth.hasRole('admin'), controller.destroy);
-userRouter.get('/me', auth.isAuthenticated(), controller.me);
-userRouter.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
-userRouter.get('/:id', auth.isAuthenticated(), controller.show);
-userRouter.post('/', controller.create);
+userRouter.get('/api/user/', auth.isAuthenticated, controller.index);
+userRouter.delete('/api/user/:id', auth.isAuthenticated, controller.destroy);
+userRouter.get('/api/user/me', auth.isAuthenticated, controller.me);
+userRouter.put('/api/user/:id/password', auth.isAuthenticated, controller.changePassword);
+userRouter.get('/api/user/:id', auth.isAuthenticated, controller.show);
+userRouter.post('/api/user/', controller.create);
 
 module.exports = userRouter;
 
