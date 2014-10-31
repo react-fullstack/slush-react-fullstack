@@ -1,5 +1,5 @@
 {
-  "name": "koa-app",
+  "name": "app-koa",
   "version": "0.0.1",
   "description": "A template for fullstack react applications with gulp and browserify",
   "main": "index.js",
@@ -31,6 +31,8 @@
     "koa": "^0.13.0",
     "koa-bodyparser": "^1.1.0",
     "koa-compress": "^1.0.8",
+    "koa-error-handler": "0.0.0",
+    "koa-favicon": "^1.2.0",
     "koa-livereload": "^0.1.23",
     "koa-logger": "^1.2.2",
     "koa-methodoverride": "^0.3.1",
