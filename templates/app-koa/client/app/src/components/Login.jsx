@@ -22,10 +22,10 @@ var LOGIN  = React.createClass({
     };
 
     $.ajax({
-      type: 'GET',
+      type: 'POST',
       data: JSON.stringify(userData),
       contentType: 'application/json',
-      url: '/api/users/',
+      url: '/auth/local/',
       success: function(item) {
         console.log('Successfully added: ', item);
       },
