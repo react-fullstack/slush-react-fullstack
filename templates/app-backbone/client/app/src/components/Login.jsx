@@ -5,9 +5,6 @@
 
 var React = require('react');
 
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');
-
 var LOGIN  = React.createClass({
 
   handleClick: function(){
@@ -17,7 +14,7 @@ var LOGIN  = React.createClass({
   handleInput: function(e) {
     console.log("at handleInput in Login")
   },
-  
+
   render: function(){
     return (
       <div>

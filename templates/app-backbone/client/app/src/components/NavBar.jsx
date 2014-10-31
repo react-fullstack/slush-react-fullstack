@@ -5,9 +5,6 @@
 
 var React = require('react');
 
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');
-
 var Router = require('react-router');
 var Link = Router.Link;
 
@@ -16,7 +13,7 @@ function getAppState(){
 };
 
 var NAV = React.createClass({
-  
+
   render: function(){
     return (
         <nav className="navbar navbar-default" role="navigation">
