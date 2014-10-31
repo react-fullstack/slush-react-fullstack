@@ -16,7 +16,7 @@ var router = require('koa-router');
 // var router = express.Router();
 
 const authRouter = new router();
-authRouter.post('/local/', require('./local/index'));
+authRouter.post('/auth/local/', require('./local/index'));
 
 // authRouter.use('/local', require('./local'));
 // authRouter.use('/facebook', require('./facebook'));
