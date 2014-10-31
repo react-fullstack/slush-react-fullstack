@@ -5,9 +5,6 @@
 
 var React = require('react');
 
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');
-
 var NAV = require('./NavBar.jsx');
 var BANNER = require('./Banner.jsx')
 
@@ -21,7 +18,7 @@ var SIGNUP  = React.createClass({
   handleInput: function(e) {
     console.log("at handleInput in Signup")
   },
-  
+
   render: function(){
     return (
       <div>
@@ -46,14 +43,14 @@ var SIGNUP  = React.createClass({
                 <input type="password" className="form-control" id="inputPassword3" placeholder="Password" onKeyPress={this.handleInput}/>
               </div>
             </div>
-           
+
             <div className="form-group">
               <div className="control-button">
                 <button type="submit" className="btn btn-default" onClick={this.handleClick} >Sign up</button>
               </div>
             </div>
           </form>
-        </div> 
+        </div>
       </div>
 
       )

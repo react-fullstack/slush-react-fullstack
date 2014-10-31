@@ -3,10 +3,11 @@
 
 'use strict';
 
-var React = require('react');
+var Backbone = require('backbone');
 
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');
+var Todos = require('../collections/todos');
+
+var React = require('react');
 
 var NAV = require('./NavBar.jsx');
 var BANNER = require('./Banner.jsx');
@@ -14,19 +15,47 @@ var TODO = require('./ToDo.jsx');
 
 var Q = require('q');
 
-function getAppState(){
-  return AppStore.getData();
+var BackboneMixin = {
+	componentDidMount: function () {
+		// Whenever there may be a change in the Backbone data, trigger a
+		// reconcile.
+    console.log('collections', this.getBackboneCollections());
+		this.getBackboneCollections().forEach(function (collection) {
+			console.log('binding');
+
+      // Add event listener to the collection to
+      // force update on change.
+      collection.on('add remove change', function() {
+        //console.log('update!');
+        this.forceUpdate();
+      }.bind(this));
+
+      // Initial fetch of the collection.
+      collection.fetch();
+		}, this);
+	},
+
+	componentWillUnmount: function () {
+		// Ensure that we clean up any dangling references when the component is
+		// destroyed.
+		this.getBackboneCollections().forEach(function (collection) {
+			collection.off(null, null, this);
+		}, this);
+	}
 };
 
-function getInitialAppState(){
-  return AppStore.getInitialData();
-}
-
 var APP = React.createClass({
+  mixins: [BackboneMixin],
+
+  getBackboneCollections: function() {
+    return [this.state.todos];
+  },
+
   getInitialState: function(){
-    return getInitialAppState();
-    // return getAppState();
-    // return null;
+    // Initialize Backbone Todos model
+    var todos = new Todos();
+    console.log("todos:", todos);
+    return {todos: todos};
   },
 
   _onChange: function(){
@@ -34,37 +63,26 @@ var APP = React.createClass({
     var that = this;
     Q(getAppState()).then(function(promise){
       console.log('change')
-      console.log(promise)
-      that.setState({todos: promise})
+      console.log(that.state)
+      that.setState({todos: that.state.todos.models})
+      that.forceUpdate();
     })
 
   },
 
   componentDidMount: function(){
     var that = this;
-    console.log(1)
-    AppStore.addChangeListener(this._onChange);
-    // Q(AppActions.populateAction()).then(function(promisedData){
-    //   console.log(promisedData);
-    //   this.setState(promisedData);
-    // });
-    Q(getAppState()).then(function(promise){
-      console.log(2)
-      console.log("this:",that)
-      console.log(promise)
-      // var data = {todos: promise}
-      that.setState({todos: promise})
-    })
+    console.log("mounted");
   },
 
   componentWillUnmount: function(){
-    AppStore.removeChangeListener(this._onChange);
+
   },
 
   handleClick: function(){
-    AppActions.exampleAction('Data from View');
+
   },
-  
+
   render: function(){
     return (
       <div>

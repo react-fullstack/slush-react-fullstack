@@ -5,8 +5,6 @@
 
 var React = require('react');
 
-var AppStore = require('../stores/AppStore');
-var AppActions = require('../actions/AppActions');
 var ITEM = require('./Item.jsx');
 
 
@@ -16,7 +14,7 @@ var TODO = React.createClass({
 
     var task = this.refs.todo.getDOMNode().value.trim();
     if (task != '') {
-      AppActions.addItemAction(task);
+      this.props.allTodos.add({item: task});
     }
     this.refs.todo.getDOMNode().value = '';
   },
@@ -28,8 +26,13 @@ var TODO = React.createClass({
   },
 
   render: function(){
-    var items = this.props.allTodos.map(function(item, i) {
-      return <ITEM item={item} key={i}/>
+    //console.log('RENDER:', this.props);
+    var items = this.props.allTodos.models.map(function(todo, i) {
+      //console.log(todo);
+      //console.log(todo.get('item'));
+
+      // pass todo model to item component
+      return <ITEM item={todo} key={i}/>
     });
     return (
       <div>
@@ -43,10 +46,10 @@ var TODO = React.createClass({
             </div>
           <div><h3>Features:</h3></div>
           <ul className="list-group">
-            {items} 
+            {items}
           </ul>
-        </div> 
-      </div>     
+        </div>
+      </div>
     );
   }
 })
