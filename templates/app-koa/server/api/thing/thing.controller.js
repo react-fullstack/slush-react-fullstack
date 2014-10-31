@@ -70,7 +70,7 @@ exports.create = function *() {
   //   }
   // });
 
-  var thing = yield Thing.create(this.request.body).exec();
+  var thing = yield Thing.create(this.request.body);
   this.response.status = 201;
   this.response.body = thing;
 };

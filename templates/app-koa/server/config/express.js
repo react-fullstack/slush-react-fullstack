@@ -14,6 +14,7 @@ var methodOverride = require('koa-methodoverride');
 var compression = require('koa-compress');
 var logger = require('koa-logger');
 var errorHandler = require('koa-error-handler');
+var favicon = require('koa-favicon');
 
 // var express = require('express');
 var favicon = require('serve-favicon');
@@ -87,9 +88,10 @@ module.exports = function(app) {
   //   app.use(errorHandler()); // Error handler - has to be last
   // }
 
+  // app.use(favicon(path.join(config.root, 'public', 'favicon.ico')));
   app.use(require('koa-livereload')());
   app.use(serve(path.join(config.root, '.tmp')));
   app.use(serve(path.join(config.root, 'client')));
   app.use(logger());
-  errorHandler(app); // Error handler - has to be last
+  // errorHandler(app); // Error handler - has to be last
 };

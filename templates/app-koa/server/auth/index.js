@@ -17,10 +17,10 @@ require('./twitter/passport').setup(User, config);
 
 const authRouter = new router();
 
-authRouter.use('/local', require('./local'));
-authRouter.use('/facebook', require('./facebook'));
-authRouter.use('/twitter', require('./twitter'));
-authRouter.use('/google', require('./google'));
+// authRouter.use('/local', require('./local'));
+// authRouter.use('/facebook', require('./facebook'));
+// authRouter.use('/twitter', require('./twitter'));
+// authRouter.use('/google', require('./google'));
 
 module.exports = authRouter;
 
