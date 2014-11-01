@@ -1,15 +1,17 @@
 {
-  "name": "slush-react-fullstack-test",
-  "version": "0.0.1",
+  "name": "slush-react-fullstack",
+  "version": "0.1.1",
   "homepage": "https://github.com/urban-boa/SlushDraft",
   "description": "slush generator",
   "main": "slushfile.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/urban-boa/SlushDraft.git"
+    "url": "https://github.com/react-fullstack/slush-react-fullstack.git"
   },
   "keywords": [
     "slushgenerator",
+    "generator",
+    "slush",
     "React",
     "Flux",
     "Expressjs",
@@ -19,7 +21,7 @@
   "author": "urban-boa",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/urban-boa/SlushDraft/issues"
+    "url": "https://github.com/react-fullstack/slush-react-fullstack/issues"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
