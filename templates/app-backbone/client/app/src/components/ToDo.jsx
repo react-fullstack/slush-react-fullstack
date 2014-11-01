@@ -14,7 +14,7 @@ var TODO = React.createClass({
 
     var task = this.refs.todo.getDOMNode().value.trim();
     if (task != '') {
-      this.props.allTodos.add({item: task});
+      this.props.allTodos.add({item: task}).save();
     }
     this.refs.todo.getDOMNode().value = '';
   },
