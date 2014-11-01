@@ -1,30 +1,24 @@
-//NOT HANDLING ERRORS
 //MIGHT NEED TO HANDLE NEXT DIFFERENTLY
 
 'use strict';
 
 var User = require('./user.model');
-// var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 
-var validationError = function *(res, err) {
-  res.status = 422;
-  res.body = err;
-  // return res.json(422, err);
+var validationError = function *(err) {
+  this.throw(422, err);
 };
 
 /**
  * Get list of users
- * restriction: 'admin'
  */
 exports.index = function *() {
-  // User.find({}, '-salt -hashedPassword', function (err, users) {
-  //   if(err) return this.response.send(500, err);
-  //   this.response.json(200, users);
-  // });
-
-  var users = yield User.find({}, '-salt -hashedPassword').exec();
+  try {
+    var users = yield User.find({}, '-salt -hashedPassword').exec();
+  } catch(err) {
+    this.throw(500, err);
+  }
   this.response.status = 200;
   this.response.body = users;
 };
@@ -33,22 +27,14 @@ exports.index = function *() {
  * Creates a new user
  */
 exports.create = function *(next) {
-  // var newUser = new User(this.request.body);
-  // newUser.provider = 'local';
-  // newUser.role = 'user';
-  // newUser.save(function(err, user) {
-  //   if (err) {
-  //     return validationError(this.response, err);
-  //   }
-  //   var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
-  //   this.response.json({ token: token });
-  // });
-
   var newUser = this.request.body;
   newUser.provider = 'local';
   newUser.role = 'user';
-  console.log('HERE');
-  var user = yield User.create(newUser);
+  try{
+    var user = yield User.create(newUser);
+  } catch (err) {
+    yield validationError(err);
+  }
   var token = jwt.sign({_id: user._id }, config.secrets.session, { expiresInMinutes: 60*5 });
   this.response.body = {token: token};
 };
@@ -57,16 +43,14 @@ exports.create = function *(next) {
  * Get a single user
  */
 exports.show = function *(next) {
-  // var userId = this.request.params.id;
-
-  // User.findById(userId, function (err, user) {
-  //   if (err) return next(err);
-  //   if (!user) return this.response.send(401);
-  //   this.response.json(user.profile);
-  // });
-
   var userId = this.params.id;
-  var user = yield User.findById(userId).exec();
+  
+  try {
+    var user = yield User.findById(userId).exec();
+  } catch (err) {
+    yield next(err);
+  }
+
   if(!user){
     this.response.status = 401;
   } else {
@@ -79,12 +63,11 @@ exports.show = function *(next) {
  * restriction: 'admin'
  */
 exports.destroy = function *() {
-  // User.findByIdAndRemove(this.request.params.id, function(err, user) {
-  //   if(err) return this.response.send(500, err);
-  //   return this.response.send(204);
-  // });
-
-  var user = yield User.findByIdAndRemove(this.params.id).exec();
+  try {
+    var user = yield User.findByIdAndRemove(this.params.id).exec();
+  } catch (err) {
+    this.throw(500, err);
+  }
   this.response.status = 204;
 };
 
@@ -92,51 +75,33 @@ exports.destroy = function *() {
  * Change a users password
  */
 exports.changePassword = function *(next) {
-  // var userId = this.request.user._id;
-  // var oldPass = String(this.request.body.oldPassword);
-  // var newPass = String(this.request.body.newPassword);
-
-  // User.findById(userId, function (err, user) {
-  //   if(user.authenticate(oldPass)) {
-  //     user.password = newPass;
-  //     user.save(function(err) {
-  //       if (err) return validationError(this.response, err);
-  //       this.response.send(200);
-  //     });
-  //   } else {
-  //     this.response.send(403);
-  //   }
-  // });
-
   var userId = this.request.user._id;
   var oldPass = String(this.request.body.oldPassword);
   var newPass = String(this.request.body.newPassword);
   var user = yield User.findById(userId).exec();
   if(user.authenticate(oldPass)){
     user.password = newPass;
-    yield user.save();
+    try {
+      yield user.save();
+    } catch(err) {
+      yield validationError(err);
+    }
     this.response.status = 200;
   } else {
     this.response.status = 403;
   }
-
 };
 
 /**
  * Get my info
  */
 exports.me = function *(next) {
-  // var userId = this.request.user._id;
-  // User.findOne({
-  //   _id: userId
-  // }, '-salt -hashedPassword', function(err, user) { // don't ever give out the password or salt
-  //   if (err) return next(err);
-  //   if (!user) return this.response.json(401);
-  //   this.response.json(user);
-  // });
-
   var userId = this.request.user._id;
-  var user = User.findOne({_id: userId}, '-salt -hashedPassword').exec();
+  try {
+    var user = User.findOne({_id: userId}, '-salt -hashedPassword').exec();
+  } catch (err) {
+    yield next(err);
+  }
   if(!user){
     this.response.status = 401;
   } else {
